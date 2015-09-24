@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Migrations;
+using StatsMon.Models.Sales;
 
 namespace StatsMon.Models
 {
@@ -24,6 +25,38 @@ namespace StatsMon.Models
 
         public DbSet<SKUPurchase> SKUPurchases { get; set; }
         public DbSet<SKUInventoryStatistic> SKUInventoryStatistics { get; set; }
+
+        public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
+        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SalesOrderDetail>()
+                .Property(e => e.UnitPrice)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<SalesOrderDetail>()
+                .Property(e => e.UnitPriceDiscount)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<SalesOrder>()
+                .Property(e => e.CreditCardApprovalCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SalesOrder>()
+                .Property(e => e.SubTotal)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<SalesOrder>()
+                .Property(e => e.TaxAmt)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<SalesOrder>()
+                .Property(e => e.Freight)
+                .HasPrecision(19, 4);
+
+        }
+
     }
 
     public class StatusMonContextInitializer : DropCreateDatabaseAlways<StatusMonContext>
