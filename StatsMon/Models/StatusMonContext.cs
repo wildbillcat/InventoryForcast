@@ -11,7 +11,13 @@ namespace StatsMon.Models
     public class StatusMonContext : DbContext
     {
         public StatusMonContext()
-            : base("SchoolContext")
+            : base("DefaultConnection")
+        {
+            //Database.SetInitializer<StatusMonContext>(new StatusMonContextInitializer());
+        }
+
+        public StatusMonContext(string connectionString)
+            : base("connectionString")
         {
             //Database.SetInitializer<StatusMonContext>(new StatusMonContextInitializer());
         }
