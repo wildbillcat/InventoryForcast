@@ -17,7 +17,7 @@ namespace StatsMon.Models
         }
 
         public StatusMonContext(string connectionString)
-            : base("connectionString")
+            : base(connectionString)
         {
             //Database.SetInitializer<StatusMonContext>(new StatusMonContextInitializer());
         }
