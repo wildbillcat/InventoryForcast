@@ -17,17 +17,12 @@ namespace StatsMon.Models.Sales
         [Key]
         public int SalesOrderID { get; set; }
 
-        public byte RevisionNumber { get; set; }
-
         public DateTime OrderDate { get; set; }
 
         public DateTime? ShipDate { get; set; }
 
         public byte Status { get; set; }
 
-        public bool OnlineOrderFlag { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Required]
         [StringLength(25)]
         public string SalesOrderNumber { get; set; }

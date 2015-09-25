@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\SKUInventoryStatisticsController.cs" />
+    <Compile Include="Controllers\api\SalesOrdersController.cs" />
     <Compile Include="Controllers\api\SKUPurchasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SKUPurchasesController.cs" />
@@ -192,6 +193,10 @@
     <Compile Include="Migrations\201509241446227_updated_model_based_on_adventureworks.cs" />
     <Compile Include="Migrations\201509241446227_updated_model_based_on_adventureworks.Designer.cs">
       <DependentUpon>201509241446227_updated_model_based_on_adventureworks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509250032386_simplified_model_a_little_more.cs" />
+    <Compile Include="Migrations\201509250032386_simplified_model_a_little_more.Designer.cs">
+      <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Sales\SalesOrderDetail.cs" />
@@ -272,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509241446227_updated_model_based_on_adventureworks.resx">
       <DependentUpon>201509241446227_updated_model_based_on_adventureworks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509250032386_simplified_model_a_little_more.resx">
+      <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
