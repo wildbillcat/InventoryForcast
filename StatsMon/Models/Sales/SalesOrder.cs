@@ -15,7 +15,7 @@ namespace StatsMon.Models.Sales
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SalesOrderID { get; set; }
 
         public DateTime OrderDate { get; set; }
