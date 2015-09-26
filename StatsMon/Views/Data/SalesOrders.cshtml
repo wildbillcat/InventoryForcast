@@ -1,0 +1,161 @@
+﻿@model IEnumerable<StatsMon.Models.Sales.SalesOrder>
+
+@{
+    ViewBag.Title = "Sales Orders";
+}
+
+<h2>Sales Orders API</h2>
+
+<div ng-app="app" ng-controller="SalesOrderController as salesOrderController">
+    <table class="table" id="Pagenation Bar">
+        <tr>
+            <td>
+                <a href="" ng-click="salesOrderController.firstPage()">First</a>
+                |
+                <a href="" ng-click="salesOrderController.previousPage()">Previous</a>
+            </td>
+            <td style="text-align: center;">
+                Page:{{salesOrderController.page}}
+            </td>
+            <td style="text-align: right;">
+                <a href="" ng-click="salesOrderController.nextPage()">Next</a>
+                |
+                <a href="" ng-click="salesOrderController.lastPage()">Last</a>
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesOrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesOrderNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseOrderNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TerritoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillToAddressID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipToAddressID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipMethodID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardApprovalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyRateID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxAmt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Freight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th></th>
+        </tr>
+
+        <tr ng-repeat="salesOrder in salesOrderController.salesOrders  | orderBy: 'SalesOrderID' ">
+            <td>
+                {{salesOrder.SalesOrderID}}
+            </td>
+            <td>
+                {{salesOrder.OrderDate}}
+            </td>
+            <td>
+                {{salesOrder.ShipDate}}
+            </td>
+            <td>
+                {{salesOrder.Status}}
+            </td>
+            <td>
+                {{salesOrder.SalesOrderNumber}}
+            </td>
+            <td>
+                {{salesOrder.PurchaseOrderNumber}}
+            </td>
+            <td>
+                {{salesOrder.AccountNumber}}
+            </td>
+            <td>
+                {{salesOrder.SalesOrderID}}
+            </td>
+            <td>
+                {{salesOrder.CustomerID}}
+            </td>
+            <td>
+                {{salesOrder.TerritoryID}}
+            </td>
+            <td>
+                {{salesOrder.BillToAddressID}}
+            </td>
+            <td>
+                {{salesOrder.ShipToAddressID}}
+            </td>
+            <td>
+                {{salesOrder.ShipMethodID}}
+            </td>
+            <td>
+                {{salesOrder.CreditCardID}}
+            </td>
+            <td>
+                {{salesOrder.CreditCardApprovalCode}}
+            </td>
+            <td>
+                {{salesOrder.CurrencyRateID}}
+            </td>
+            <td>
+                {{salesOrder.SubTotal}}
+            </td>
+            <td>
+                {{salesOrder.TaxAmt}}
+            </td>
+            <td>
+                {{salesOrder.Freight}}
+            </td>
+            <td>
+                {{salesOrder.Comment}}
+            </td>
+            <td>
+                <a href="" ng-click="salesOrderController.getSalesOrder(salesOrder)">Update Item</a> |
+                <a href="" ng-click="salesOrderController.deleteSalesOrder(salesOrder)">Delete Item</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/app/skuPurchaseController.js"></script>
+

@@ -23,9 +23,6 @@ namespace StatsMon.Models
             //Database.SetInitializer<StatusMonContext>(new StatusMonContextInitializer());
         }
 
-        public DbSet<SKUPurchase> SKUPurchases { get; set; }
-        public DbSet<SKUInventoryStatistic> SKUInventoryStatistics { get; set; }
-
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
 
@@ -89,12 +86,7 @@ namespace StatsMon.Models
                         }
                     );
 
-                context.SKUPurchases.AddOrUpdate(
-                  new SKUPurchase { Id = gen.Next(411699), PurchaseID = gen.Next(), Quantity = gen.Next(1, 10), PurchaseDate = DateTime.UtcNow.AddDays(-1 * (new Random().Next(1825))) },//1825 is 8 years in days
-                  new SKUPurchase { Id = gen.Next(411699), PurchaseID = gen.Next(), Quantity = gen.Next(1, 10), PurchaseDate = DateTime.UtcNow.AddDays(-1 * (new Random().Next(1825))) }
-                );
             }
-            //base.Seed(context);
         }
     }
 }

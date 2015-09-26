@@ -14,14 +14,14 @@ namespace StatsMon.Controllers
             return View();
         }
 
-        // GET: Data
+        // GET: SalesOrder SPA
         public ActionResult SalesOrders()
         {
             return View();
         }
 
-        // GET: Data
-        public ActionResult Index()
+        // GET: SalesOrderDetail SPA
+        public ActionResult SalesOrderDetails()
         {
             return View();
         }

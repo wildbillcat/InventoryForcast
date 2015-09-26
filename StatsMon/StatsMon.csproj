@@ -199,6 +199,10 @@
     <Compile Include="Migrations\201509250032386_simplified_model_a_little_more.Designer.cs">
       <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509260414021_removed_old_sku_from_DBModel.cs" />
+    <Compile Include="Migrations\201509260414021_removed_old_sku_from_DBModel.Designer.cs">
+      <DependentUpon>201509260414021_removed_old_sku_from_DBModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Sales\SalesOrderDetail.cs" />
     <Compile Include="Models\Sales\SalesOrder.cs" />
@@ -218,6 +222,7 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\salesOrderController.js" />
     <Content Include="Scripts\app\skuPurchaseController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -255,10 +260,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\SKUPurchases\Index.cshtml" />
     <Content Include="Views\SKUPurchases\Forcast.cshtml" />
+    <Content Include="Views\Data\SalesOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -282,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509250032386_simplified_model_a_little_more.resx">
       <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509260414021_removed_old_sku_from_DBModel.resx">
+      <DependentUpon>201509260414021_removed_old_sku_from_DBModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
