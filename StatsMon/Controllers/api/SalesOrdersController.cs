@@ -35,9 +35,9 @@ namespace StatsMon.Controllers.api
 
         // GET: api/SalesOrders/5
         [ResponseType(typeof(SalesOrder))]
-        public async Task<IHttpActionResult> GetSalesOrder(long id, long PurchaseID)
+        public async Task<IHttpActionResult> GetSalesOrder(long id)
         {
-            SalesOrder SalesOrder = await db.SalesOrders.FindAsync(id, PurchaseID);
+            SalesOrder SalesOrder = await db.SalesOrders.FindAsync(id);
             if (SalesOrder == null)
             {
                 return NotFound();
@@ -113,9 +113,9 @@ namespace StatsMon.Controllers.api
 
         // DELETE: api/SalesOrders/5
         [ResponseType(typeof(SalesOrder))]
-        public async Task<IHttpActionResult> DeleteSalesOrder(long id, long PurchaseID)
+        public async Task<IHttpActionResult> DeleteSalesOrder(long id)
         {
-            SalesOrder SalesOrder = await db.SalesOrders.FindAsync(id, PurchaseID);
+            SalesOrder SalesOrder = await db.SalesOrders.FindAsync(id);
             if (SalesOrder == null)
             {
                 return NotFound();
