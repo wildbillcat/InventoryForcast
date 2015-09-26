@@ -172,6 +172,7 @@
     <Compile Include="Controllers\api\SKUInventoryStatisticsController.cs" />
     <Compile Include="Controllers\api\SalesOrdersController.cs" />
     <Compile Include="Controllers\api\SKUPurchasesController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SKUPurchasesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -257,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
