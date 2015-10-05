@@ -10,17 +10,12 @@
     {
         [Key]
         [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SalesOrderID { get; set; }
 
-        /// <summary>
-        /// Normally this would be database generated in a Prod Environment, but the use
-        /// case for this application is that it is a Data Warehouse application, thus
-        /// Database would have already generated this ID.
-        /// </summary>
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SalesOrderDetailID { get; set; }
 
         [StringLength(25)]

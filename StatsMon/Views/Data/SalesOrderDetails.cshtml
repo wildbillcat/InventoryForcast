@@ -1,0 +1,92 @@
+﻿@model IEnumerable<StatsMon.Models.Sales.SalesOrderDetail>
+
+@{
+    ViewBag.Title = "Sales Order Details";
+}
+
+<h2>Sales Order Details API</h2>
+
+<div ng-app="app" ng-controller="SalesOrderDetailController as salesOrderDetailController">
+    <table class="table" id="Pagenation Bar">
+        <tr>
+            <td>
+                <a href="" ng-click="salesOrderDetailController.firstPage()">First</a>
+                |
+                <a href="" ng-click="salesOrderDetailController.previousPage()">Previous</a>
+            </td>
+            <td style="text-align: center;">
+                Page:{{salesOrderDetailController.page}}
+            </td>
+            <td style="text-align: right;">
+                <a href="" ng-click="salesOrderDetailController.nextPage()">Next</a>
+                |
+                <a href="" ng-click="salesOrderDetailController.lastPage()">Last</a>
+            </td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesOrderID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesOrderDetailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarrierTrackingNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialOfferID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPriceDiscount)
+            </th>
+            <th></th>
+        </tr>
+
+        <tr ng-repeat="salesOrder in salesOrderDetailController.salesOrders  | orderBy: 'SalesOrderDetailID' ">
+            <td>
+                {{salesOrder.SalesOrderID}}
+            </td>
+            <td>
+                {{salesOrder.SalesOrderDetailID}}
+            </td>
+            <td>
+                {{salesOrder.CarrierTrackingNumber}}
+            </td>
+            <td>
+                {{salesOrder.OrderQty}}
+            </td>
+            <td>
+                {{salesOrder.ProductID}}
+            </td>
+            <td>
+                {{salesOrder.SpecialOfferID}}
+            </td>
+            <td>
+                {{salesOrder.UnitPrice}}
+            </td>
+            <td>
+                {{salesOrder.UnitPriceDiscount}}
+            </td>
+            <td>
+                <a href="" ng-click="salesOrderDetailController.getSalesOrder(salesOrder)">Update Item</a> |
+                <a href="" ng-click="salesOrderDetailController.deleteSalesOrder(salesOrder)">Delete Item</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="/Scripts/angular.js"></script>
+    <script src="~/Scripts/app/salesOrderDetailController.js"></script>
+}

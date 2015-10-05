@@ -169,53 +169,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\api\SKUInventoryStatisticsController.cs" />
+    <Compile Include="Controllers\api\SalesOrderDetailsController.cs" />
     <Compile Include="Controllers\api\SalesOrdersController.cs" />
-    <Compile Include="Controllers\api\SKUPurchasesController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SKUPurchasesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\UpdateHub.cs" />
-    <Compile Include="Migrations\201509120406335_init.cs" />
-    <Compile Include="Migrations\201509120406335_init.Designer.cs">
-      <DependentUpon>201509120406335_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509120420417_init1.cs" />
-    <Compile Include="Migrations\201509120420417_init1.Designer.cs">
-      <DependentUpon>201509120420417_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509130730336_addedTheSKUInventoryStatisticsObject.cs" />
-    <Compile Include="Migrations\201509130730336_addedTheSKUInventoryStatisticsObject.Designer.cs">
-      <DependentUpon>201509130730336_addedTheSKUInventoryStatisticsObject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509241446227_updated_model_based_on_adventureworks.cs" />
-    <Compile Include="Migrations\201509241446227_updated_model_based_on_adventureworks.Designer.cs">
-      <DependentUpon>201509241446227_updated_model_based_on_adventureworks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509250032386_simplified_model_a_little_more.cs" />
-    <Compile Include="Migrations\201509250032386_simplified_model_a_little_more.Designer.cs">
-      <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509260414021_removed_old_sku_from_DBModel.cs" />
-    <Compile Include="Migrations\201509260414021_removed_old_sku_from_DBModel.Designer.cs">
-      <DependentUpon>201509260414021_removed_old_sku_from_DBModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509260540036_updated_identity.cs" />
-    <Compile Include="Migrations\201509260540036_updated_identity.Designer.cs">
-      <DependentUpon>201509260540036_updated_identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509260545032_updated_identity_on_details.cs" />
-    <Compile Include="Migrations\201509260545032_updated_identity_on_details.Designer.cs">
-      <DependentUpon>201509260545032_updated_identity_on_details.cs</DependentUpon>
+    <Compile Include="Migrations\201510031703076_init.cs" />
+    <Compile Include="Migrations\201510031703076_init.Designer.cs">
+      <DependentUpon>201510031703076_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Sales\SalesOrderDetail.cs" />
     <Compile Include="Models\Sales\SalesOrder.cs" />
-    <Compile Include="Models\SKUInventoryStatistic.cs" />
-    <Compile Include="Models\SKUPurchase.cs" />
     <Compile Include="Models\StatusMonContext.cs" />
     <Compile Include="Models\UpdateNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -233,6 +201,7 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\salesOrderDetailController.js" />
     <Content Include="Scripts\app\salesOrderController.js" />
     <Content Include="Scripts\app\skuPurchaseController.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -244,6 +213,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Resources\Add-SalesOrder.ps1" />
+    <Content Include="Resources\Add-SalesOrderDetail.ps1" />
+    <Content Include="Resources\Sales_SalesOrderDetail.csv" />
+    <Content Include="Resources\Sales_SalesOrderHeader.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -279,9 +252,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\SKUPurchases\Index.cshtml" />
-    <Content Include="Views\SKUPurchases\Forcast.cshtml" />
     <Content Include="Views\Data\SalesOrders.cshtml" />
+    <Content Include="Views\Data\SalesOrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -291,29 +263,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509120406335_init.resx">
-      <DependentUpon>201509120406335_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509120420417_init1.resx">
-      <DependentUpon>201509120420417_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509130730336_addedTheSKUInventoryStatisticsObject.resx">
-      <DependentUpon>201509130730336_addedTheSKUInventoryStatisticsObject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509241446227_updated_model_based_on_adventureworks.resx">
-      <DependentUpon>201509241446227_updated_model_based_on_adventureworks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509250032386_simplified_model_a_little_more.resx">
-      <DependentUpon>201509250032386_simplified_model_a_little_more.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509260414021_removed_old_sku_from_DBModel.resx">
-      <DependentUpon>201509260414021_removed_old_sku_from_DBModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509260540036_updated_identity.resx">
-      <DependentUpon>201509260540036_updated_identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509260545032_updated_identity_on_details.resx">
-      <DependentUpon>201509260545032_updated_identity_on_details.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510031703076_init.resx">
+      <DependentUpon>201510031703076_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
