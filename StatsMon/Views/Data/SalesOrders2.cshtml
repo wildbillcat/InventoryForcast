@@ -1,0 +1,133 @@
+﻿@model PagedList.IPagedList<StatsMon.Models.Sales.SalesOrder>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "SalesOrders2";
+}
+
+<h2>SalesOrders2</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            OrderDate
+        </th>
+        <th>
+            ShipDate
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            SalesOrderNumber
+        </th>
+        <th>
+            PurchaseOrderNumber
+        </th>
+        <th>
+            AccountNumber
+        </th>
+        <th>
+            CustomerID
+        </th>
+        <th>
+            TerritoryID
+        </th>
+        <th>
+            BillToAddressID
+        </th>
+        <th>
+            ShipToAddressID
+        </th>
+        <th>
+            ShipMethodID
+        </th>
+        <th>
+            CreditCardID
+        </th>
+        <th>
+            CreditCardApprovalCode
+        </th>
+        <th>
+            CurrencyRateID
+        </th>
+        <th>
+            SubTotal
+        </th>
+        <th>
+            TaxAmt
+        </th>
+        <th>
+            Freight
+        </th>
+        <th>
+            Comment
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TerritoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillToAddressID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipToAddressID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipMethodID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditCardID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditCardApprovalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrencyRateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxAmt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Freight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("SalesOrders2",
+    new { page }))

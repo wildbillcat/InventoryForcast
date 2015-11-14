@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<StatsMon.Models.Sales.SalesOrderDetail>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "SalesOrderDetails2";
+}
+
+<h2>SalesOrderDetails2</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            SalesOrderNumber
+        </th>
+        <th>
+            CarrierTrackingNumber
+        </th>
+        <th>
+            OrderQty
+        </th>
+        <th>
+            ProductID
+        </th>
+        <th>
+            SpecialOfferID
+        </th>
+        <th>
+            UnitPrice
+        </th>
+        <th>
+            UnitPriceDiscount
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesOrder.SalesOrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarrierTrackingNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialOfferID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPriceDiscount)
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("SalesOrderDetails2",
+    new { page }))
