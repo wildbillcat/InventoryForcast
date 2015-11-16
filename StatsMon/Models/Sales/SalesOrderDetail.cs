@@ -37,6 +37,6 @@
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         //public decimal LineTotal { get; set; }
         
-        public virtual SalesOrder SalesOrder { get; set; }
+        public SalesOrder SalesOrder { get; set; }
     }
 }

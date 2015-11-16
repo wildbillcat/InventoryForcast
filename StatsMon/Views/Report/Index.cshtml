@@ -1,0 +1,69 @@
+﻿@model IEnumerable<StatsMon.Models.Sku.InventoryReport>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SkuId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StandardDeviation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForcastSlope)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForcastIntercept)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForcastValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForcastRangeUpperBound)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkuClass)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkuId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StandardDeviation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForcastSlope)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForcastIntercept)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForcastValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForcastRangeUpperBound)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkuClass)
+        </td>
+    </tr>
+}
+
+</table>

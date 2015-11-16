@@ -51,6 +51,7 @@ namespace StatsMon.Models
                 .HasPrecision(19, 4);
         }
 
+        public System.Data.Entity.DbSet<StatsMon.Models.Sku.InventoryReport> InventoryReports { get; set; }
     }
 
 }
