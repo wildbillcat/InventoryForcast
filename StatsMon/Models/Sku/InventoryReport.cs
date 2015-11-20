@@ -14,7 +14,6 @@ namespace StatsMon.Models.Sku
         public double ForcastSlope { get; set; }
         public double ForcastIntercept { get; set; }
         public double ForcastValue { get; set; }
-        public double ForcastRangeUpperBound { get; set; }
         public int TotalSales { get; set; }
         public string SkuClass { get; set; }
 
@@ -25,7 +24,6 @@ namespace StatsMon.Models.Sku
             ForcastSlope = _ForcastVals[0];
             ForcastIntercept = _ForcastVals[1];
             ForcastValue = _ForcastVals[2];
-            ForcastRangeUpperBound = _ForcastVals[3];
             TotalSales = _TotalSales;
             switch (TotalSales)
             {

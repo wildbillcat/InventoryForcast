@@ -11,11 +11,10 @@ using StatsMon.Models.Sales;
 using StatsMon.Models.Sku;
 using PagedList.Mvc;
 using PagedList;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using StatsCalc;
 
 namespace StatsMon.Controllers
 {
@@ -66,7 +65,7 @@ namespace StatsMon.Controllers
         private List<int> MonthlySales(int SkuId, DateTime StartDate, DateTime EndDate)
         {
             List<int> SalesNumbers = new List<int>();
-            for (DateTime ModifyDate = StartDate.Date; ModifyDate <= EndDate.Date; ModifyDate = ModifyDate.AddMonths(1))
+            for (DateTime ModifyDate = StartDate.Date; ModifyDate <= EndDate; ModifyDate = ModifyDate.AddMonths(1))
             {
                 SalesNumbers.Add(TotalSales(SkuId, ModifyDate, ModifyDate));
             }
@@ -105,17 +104,18 @@ namespace StatsMon.Controllers
             double[] ydata;
             DateTime EndDate12 = EndDate.AddMonths(-12);
             DateTime EndDate6 = EndDate.AddMonths(-6);
+            int date = (EndDate.Date.Year * 12 + EndDate.Date.Month);
             //Test if 12 Month of Data Exists
             if (db.SalesOrderDetails.Where(o => o.SalesOrder.OrderDate <= EndDate12).Count() > 0)
             {
                 SalesData = MonthlySalesD(SkuId, EndDate.AddMonths(-11), EndDate);
-                xdata = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+                xdata = new double[] { date - 11, date - 10, date - 9, date - 8, date - 7, date - 6, date - 5, date - 4, date - 3, date - 2, date - 1, date };
                 //12 Months!
             }
             else if (db.SalesOrderDetails.Where(o => o.SalesOrder.OrderDate.Date <= EndDate6).Count() > 0) {
                 //6 Months
                 SalesData = MonthlySalesD(SkuId, EndDate.AddMonths(-5), EndDate);
-                xdata = new double[] { 1, 2, 3, 4, 5, 6 }; //Actual Values are nominal
+                xdata = new double[] { date - 5, date - 4, date - 3, date - 2, date - 1, date }; //Actual Values are nominal
             }
             else
             {
@@ -125,13 +125,8 @@ namespace StatsMon.Controllers
             }
             db.Dispose();
             ydata = SalesData.ToArray();
-            
-            Tuple<double, double> p = Fit.Line(xdata, ydata);
-            double ForcastIntercept = p.Item1; // intercept
-            double ForcastSlope = p.Item2; // slope
-            double ForcastRangeUpperBound = xdata.Last();
-            double PredictedValue = ((ForcastSlope * (ForcastRangeUpperBound + 1)) + ForcastIntercept); //Next Predicted Value (ie month 7 or 13)
-            return new double[] { ForcastIntercept, ForcastSlope, PredictedValue, ForcastRangeUpperBound };
+
+            return Linear.Forcast(date + 1, xdata, ydata);
         }        
     }
 }
