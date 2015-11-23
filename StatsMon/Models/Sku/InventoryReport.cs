@@ -16,11 +16,9 @@ namespace StatsMon.Models.Sku
         public double ForcastValue { get; set; }
         public int TotalSales { get; set; }
         public string SkuClass { get; set; }
-        public DateTime LastUpdated { get; set; }
 
         public InventoryReport(int _SkuId, double _StandardDeviation, double[] _ForcastVals, int _TotalSales)
         {
-            LastUpdated = DateTime.Now;
             SkuId = _SkuId;
             StandardDeviation = _StandardDeviation;
             ForcastSlope = _ForcastVals[0];

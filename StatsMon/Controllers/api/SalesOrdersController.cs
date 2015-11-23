@@ -77,6 +77,7 @@ namespace StatsMon.Controllers.api
                     throw;
                 }
             }
+
             return StatusCode(HttpStatusCode.NoContent);
         }
 

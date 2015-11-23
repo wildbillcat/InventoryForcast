@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Migrations;
 using StatsMon.Models.Sales;
-using StatsMon.Models.Sku;
 
 namespace StatsMon.Models
 {
@@ -24,7 +23,6 @@ namespace StatsMon.Models
 
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
-        public virtual DbSet<InventoryReport> InventoryReports { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,6 +50,8 @@ namespace StatsMon.Models
                 .Property(e => e.Freight)
                 .HasPrecision(19, 4);
         }
+
+        public System.Data.Entity.DbSet<StatsMon.Models.Sku.InventoryReport> InventoryReports { get; set; }
     }
 
 }
