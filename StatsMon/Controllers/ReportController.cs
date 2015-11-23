@@ -15,6 +15,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using StatsCalc;
+using System.Data.Entity.Migrations;
 
 namespace StatsMon.Controllers
 {
@@ -23,6 +24,13 @@ namespace StatsMon.Controllers
 
         // GET: SalesOrderDetails
         public ActionResult Index()
+        {
+            StatusMonContext db = new StatusMonContext();
+            
+            return View(db.InventoryReports.ToList());
+        }
+
+        public ActionResult Generate()
         {
             StatusMonContext db = new StatusMonContext();
             DateTime MostRecent = db.SalesOrders.Max(s => s.OrderDate).Date;
@@ -37,11 +45,10 @@ namespace StatsMon.Controllers
                 double stdDev = StandardDeviation(Sku, MostRecent);
                 int totalSales = TotalSales(Sku, MostRecent.AddMonths(-12), MostRecent);
                 double[] forcastVals = Forcast(Sku, MostRecent);
-                InventoryReports.Add(new InventoryReport(Sku, stdDev, forcastVals, totalSales));
+                db.InventoryReports.AddOrUpdate(new InventoryReport(Sku, stdDev, forcastVals, totalSales));
             }
-             //});
-
-            return View(InventoryReports);
+            //});
+            return RedirectToAction("Index");
         }
 
         private int TotalSales(int SkuId, DateTime StartDate, DateTime EndDate)

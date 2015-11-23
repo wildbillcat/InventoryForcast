@@ -17,6 +17,8 @@ namespace StatsMon.Models.Sku
         public int TotalSales { get; set; }
         public string SkuClass { get; set; }
 
+        public InventoryReport() { }
+
         public InventoryReport(int _SkuId, double _StandardDeviation, double[] _ForcastVals, int _TotalSales)
         {
             SkuId = _SkuId;
