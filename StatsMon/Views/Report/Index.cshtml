@@ -32,6 +32,15 @@
         <th>
             @Html.DisplayNameFor(model => model.SkuClass)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </th>
+        @for (int i = 11; i >= 0; i--)
+        {
+            <th>
+                @(i+1)
+            </th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -57,6 +66,16 @@
         <td>
             @Html.DisplayFor(modelItem => item.SkuClass)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdated)
+        </td>
+        @for(int i = 0; i <= 11; i++)
+        {
+            <td>
+                @item.Last12Months[i] : @item.UpperboundDate.AddMonths(-1* i)
+            </td>
+        }
+        
     </tr>
 }
 

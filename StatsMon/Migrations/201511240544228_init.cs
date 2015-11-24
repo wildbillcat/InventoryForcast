@@ -8,6 +8,23 @@ namespace StatsMon.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.InventoryReports",
+                c => new
+                    {
+                        SkuId = c.Int(nullable: false),
+                        StandardDeviation = c.Double(nullable: false),
+                        ForcastSlope = c.Double(nullable: false),
+                        ForcastIntercept = c.Double(nullable: false),
+                        ForcastValue = c.Double(nullable: false),
+                        TotalSales = c.Int(nullable: false),
+                        SkuClass = c.String(),
+                        LastUpdated = c.DateTime(nullable: false),
+                        UpperboundDate = c.DateTime(nullable: false),
+                        InternalData = c.String(),
+                    })
+                .PrimaryKey(t => t.SkuId);
+            
+            CreateTable(
                 "dbo.SalesOrderDetails",
                 c => new
                     {
@@ -58,6 +75,7 @@ namespace StatsMon.Migrations
             DropIndex("dbo.SalesOrderDetails", new[] { "SalesOrderID" });
             DropTable("dbo.SalesOrders");
             DropTable("dbo.SalesOrderDetails");
+            DropTable("dbo.InventoryReports");
         }
     }
 }
