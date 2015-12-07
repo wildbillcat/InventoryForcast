@@ -12,9 +12,9 @@ namespace ForcastStats
         static void Main(string[] args)
         {
             //new List<double> {0.0, 0.0, 0.0, 0.0};
-            double[] yValues = new double[] { 6, 7, 9, 15, 21 };
-            double[] xValues = new double[] { 20, 28, 31, 38, 40 };
-            double xValueToPredict = 30;
+            double[] yValues = new double[] { 0, 1, 1, 0, 1, 0 };
+            double[] xValues = new double[] { 8, 7, 6, 5, 4, 3 };
+            double xValueToPredict = 9;
 
             double[] t = Linear.Forcast(xValueToPredict, xValues, yValues);
             System.Console.WriteLine(t[2]);

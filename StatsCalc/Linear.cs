@@ -23,6 +23,18 @@ namespace StatsCalc
             return (_yBar - (_b * _xBar));
         }
 
+        static double GetStandardDeviationOfSample(double[] _values)
+        {
+            double mean = _values.Average();
+            List<double> SquaredDifferences = new List<double>();
+            foreach (double num in _values)
+            {
+                double val = num - mean;
+                SquaredDifferences.Add((val * val));
+            }
+            return (SquaredDifferences.Sum() / (SquaredDifferences.Count - 1));
+        }
+
         static double GetSlopeValue(double[] _xValues, double[] _yValues, double _xBar, double _yBar)
         {
             List<double> numerator = new List<double>();
@@ -32,7 +44,7 @@ namespace StatsCalc
                 double y = _yValues[i];
                 double x = _xValues[i];
                 double compute = (x - _xBar) * (y - _yBar);
-                numerator.Add(compute);
+                 numerator.Add(compute);
 
                 double xMinusxBar = x - _xBar;
                 double computeDenom = xMinusxBar * xMinusxBar;
