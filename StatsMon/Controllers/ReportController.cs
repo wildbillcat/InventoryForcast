@@ -15,6 +15,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using StatsCalc;
+using System.Data.Entity.Migrations;
 
 namespace StatsMon.Controllers
 {
@@ -25,23 +26,29 @@ namespace StatsMon.Controllers
         public ActionResult Index()
         {
             StatusMonContext db = new StatusMonContext();
-            DateTime MostRecent = db.SalesOrders.Max(s => s.OrderDate).Date;
-            List<int> Skus = db.SalesOrderDetails.GroupBy(o => o.ProductID).ToList().Select(p => p.Key).ToList();
-            //This Bag will be used to store the Reports
-            ConcurrentBag<InventoryReport> InventoryReports = new ConcurrentBag<InventoryReport>();
+            
+            return View(db.InventoryReports.ToList());
+        }
 
-            //Parallel.ForEach(Skus, (Sku) =>
-            //{
+        public ActionResult Generate()
+        {
+            StatusMonContext db = new StatusMonContext();
+            DateTime MostRecent = db.SalesOrders.Max(s => s.OrderDate).Date;
+            MostRecent = MostRecent.AddDays(-1 * (MostRecent.Day - 1));
+            List<int> Skus = db.SalesOrderDetails.GroupBy(o => o.ProductID).ToList().Select(p => p.Key).ToList();
+            
             foreach (int Sku in Skus)
             {
                 double stdDev = StandardDeviation(Sku, MostRecent);
-                int totalSales = TotalSales(Sku, MostRecent.AddMonths(-12), MostRecent);
+                int[] Sales12Month = MonthlySales(Sku, MostRecent.AddMonths(-11), MostRecent).ToArray();
+                int totalSales = Sales12Month.Sum();
                 double[] forcastVals = Forcast(Sku, MostRecent);
-                InventoryReports.Add(new InventoryReport(Sku, stdDev, forcastVals, totalSales));
+                
+                InventoryReport IR = new InventoryReport(Sku, stdDev, forcastVals, totalSales, Sales12Month, MostRecent);
+                db.InventoryReports.AddOrUpdate(IR);
+                db.SaveChanges();
             }
-             //});
-
-            return View(InventoryReports);
+            return RedirectToAction("Index");
         }
 
         private int TotalSales(int SkuId, DateTime StartDate, DateTime EndDate)
@@ -50,13 +57,13 @@ namespace StatsMon.Controllers
             int Sum = 0;
             if (db.SalesOrderDetails.Where(p =>
              p.ProductID == SkuId &&
-             p.SalesOrder.OrderDate <= StartDate &&
-             p.SalesOrder.OrderDate <= EndDate).Count() > 0)
+             p.SalesOrder.OrderDate >= StartDate &&
+             p.SalesOrder.OrderDate < EndDate).Count() > 0)
             {
                 Sum = (db.SalesOrderDetails.Where(p =>
                 p.ProductID == SkuId &&
-                p.SalesOrder.OrderDate <= StartDate &&
-                p.SalesOrder.OrderDate <= EndDate).Sum(o => o.OrderQty));
+                p.SalesOrder.OrderDate >= StartDate &&
+                p.SalesOrder.OrderDate < EndDate).Sum(o => o.OrderQty));
             }
             db.Dispose();
             return Sum;
@@ -67,7 +74,7 @@ namespace StatsMon.Controllers
             List<int> SalesNumbers = new List<int>();
             for (DateTime ModifyDate = StartDate.Date; ModifyDate <= EndDate; ModifyDate = ModifyDate.AddMonths(1))
             {
-                SalesNumbers.Add(TotalSales(SkuId, ModifyDate, ModifyDate));
+                SalesNumbers.Add(TotalSales(SkuId, ModifyDate, ModifyDate.AddMonths(1)));
             }
             return SalesNumbers;
         }
@@ -78,7 +85,7 @@ namespace StatsMon.Controllers
             return SalesNumbers.Select<int, double>(i => i).ToList();
         }
 
-        private Double StandardDeviation (int SkuId, DateTime EndDate)
+        private double StandardDeviation (int SkuId, DateTime EndDate)
         {
             //This Loop Builds the array of Sales Data for the 6 Months
             List<double> SalesNumbers = MonthlySalesD(SkuId, EndDate.Date.AddMonths(-6), EndDate.Date);

@@ -13,7 +13,7 @@ namespace StatsMon.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201510031703076_init"; }
+            get { return "201511240544228_init"; }
         }
         
         string IMigrationMetadata.Source
