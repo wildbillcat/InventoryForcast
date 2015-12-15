@@ -29,5 +29,8 @@ namespace InventoryForcast.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<InventoryForcast.Models.Calculations.MonthlyTotal> MonthlyTotals { get; set; }
+
     }
 }
