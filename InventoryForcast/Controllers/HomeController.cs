@@ -10,7 +10,7 @@ namespace InventoryForcast.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "MonthlyTotals");
         }
 
         public ActionResult About()
