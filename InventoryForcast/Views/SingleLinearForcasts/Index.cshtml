@@ -1,0 +1,75 @@
+﻿@model PagedList.IPagedList<InventoryForcast.Models.Calculations.SingleLinearForcast>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            SKU
+        </th>
+        <th>
+            Month_Id
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Quantity_Forcast
+        </th>
+        <th>
+            Absolute_Quantity_Forcast
+        </th>
+        <th>
+            Sample_Size
+        </th>
+        <th>
+            SkuClass
+        </th>
+        <th>
+            Valid
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SKU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Month_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity_Forcast)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Absolute_Quantity_Forcast)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sample_Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkuClass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valid)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.SKU, Month_Id=item.Month_Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

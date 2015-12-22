@@ -188,15 +188,21 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\MonthlyTotalsController.cs" />
+    <Compile Include="Controllers\api\SingleLinearForcastsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\mvc\MonthlyTotalsController.cs" />
+    <Compile Include="Controllers\mvc\SingleLinearForcastsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201512202249332_init.cs" />
     <Compile Include="Migrations\201512202249332_init.Designer.cs">
       <DependentUpon>201512202249332_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512220224253_addedSeasonality.cs" />
+    <Compile Include="Migrations\201512220224253_addedSeasonality.Designer.cs">
+      <DependentUpon>201512220224253_addedSeasonality.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -225,6 +231,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Resources\Dates.ps1" />
+    <Content Include="Resources\Forcast.ps1" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -280,6 +288,11 @@
     <Content Include="Views\MonthlyTotals\Details.cshtml" />
     <Content Include="Views\MonthlyTotals\Edit.cshtml" />
     <Content Include="Views\MonthlyTotals\Index.cshtml" />
+    <Content Include="Views\SingleLinearForcasts\Create.cshtml" />
+    <Content Include="Views\SingleLinearForcasts\Delete.cshtml" />
+    <Content Include="Views\SingleLinearForcasts\Details.cshtml" />
+    <Content Include="Views\SingleLinearForcasts\Edit.cshtml" />
+    <Content Include="Views\SingleLinearForcasts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +306,15 @@
     <EmbeddedResource Include="Migrations\201512202249332_init.resx">
       <DependentUpon>201512202249332_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512220224253_addedSeasonality.resx">
+      <DependentUpon>201512220224253_addedSeasonality.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatsCalc\StatsCalc.csproj">
+      <Project>{e815db65-bc7f-4178-a570-8889a2e4755a}</Project>
+      <Name>StatsCalc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

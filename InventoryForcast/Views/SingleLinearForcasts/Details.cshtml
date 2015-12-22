@@ -1,0 +1,90 @@
+﻿@model InventoryForcast.Models.Calculations.SingleLinearForcast
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SingleLinearForcast</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity_Forcast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity_Forcast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Absolute_Quantity_Forcast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Absolute_Quantity_Forcast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slope)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slope)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intercept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intercept)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JSON_MonthlyTotals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JSON_MonthlyTotals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sample_Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sample_Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkuClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkuClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

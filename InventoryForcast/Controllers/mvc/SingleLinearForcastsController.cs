@@ -13,109 +13,109 @@ using PagedList;
 
 namespace InventoryForcast.Controllers.mvc
 {
-    public class MonthlyTotalsController : Controller
+    public class SingleLinearForcastsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: MonthlyTotals
+        // GET: SingleLinearForcasts
         public ActionResult Index(int? page)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            return View(db.MonthlyTotals.OrderByDescending(s => s.Date).ThenBy(H => H.SKU).ToPagedList(pageNumber, pageSize));
+            return View(db.SingleLinearForcasts.OrderByDescending(s => s.Date).ThenBy(H => H.SKU).ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: MonthlyTotals/Details/5
-        public ActionResult Details(int? id)
+        // GET: SingleLinearForcasts/Details/5
+        public ActionResult Details(int? id, int? Month_Id)
         {
-            if (id == null)
+            if (id == null || Month_Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonthlyTotal monthlyTotal = db.MonthlyTotals.Find(id);
-            if (monthlyTotal == null)
+            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id, Month_Id);
+            if (singleLinearForcast == null)
             {
                 return HttpNotFound();
             }
-            return View(monthlyTotal);
+            return View(singleLinearForcast);
         }
 
-        // GET: MonthlyTotals/Create
+        // GET: SingleLinearForcasts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MonthlyTotals/Create
+        // POST: SingleLinearForcasts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SKU,Month_Id,Quantity_Sold,Absolute_Quantity_Sold,Date")] MonthlyTotal monthlyTotal)
+        public ActionResult Create([Bind(Include = "SKU,Month_Id,Date,Quantity_Forcast,Absolute_Quantity_Forcast,Slope,Intercept,JSON_MonthlyTotals,Sample_Size,SkuClass,Valid")] SingleLinearForcast singleLinearForcast)
         {
             if (ModelState.IsValid)
             {
-                db.MonthlyTotals.Add(monthlyTotal);
+                db.SingleLinearForcasts.Add(singleLinearForcast);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(monthlyTotal);
+            return View(singleLinearForcast);
         }
 
-        // GET: MonthlyTotals/Edit/5
+        // GET: SingleLinearForcasts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonthlyTotal monthlyTotal = db.MonthlyTotals.Find(id);
-            if (monthlyTotal == null)
+            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id);
+            if (singleLinearForcast == null)
             {
                 return HttpNotFound();
             }
-            return View(monthlyTotal);
+            return View(singleLinearForcast);
         }
 
-        // POST: MonthlyTotals/Edit/5
+        // POST: SingleLinearForcasts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SKU,Month_Id,Quantity_Sold,Absolute_Quantity_Sold,Date")] MonthlyTotal monthlyTotal)
+        public ActionResult Edit([Bind(Include = "SKU,Month_Id,Date,Quantity_Forcast,Absolute_Quantity_Forcast,Slope,Intercept,JSON_MonthlyTotals,Sample_Size,SkuClass,Valid")] SingleLinearForcast singleLinearForcast)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(monthlyTotal).State = EntityState.Modified;
+                db.Entry(singleLinearForcast).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(monthlyTotal);
+            return View(singleLinearForcast);
         }
 
-        // GET: MonthlyTotals/Delete/5
+        // GET: SingleLinearForcasts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonthlyTotal monthlyTotal = db.MonthlyTotals.Find(id);
-            if (monthlyTotal == null)
+            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id);
+            if (singleLinearForcast == null)
             {
                 return HttpNotFound();
             }
-            return View(monthlyTotal);
+            return View(singleLinearForcast);
         }
 
-        // POST: MonthlyTotals/Delete/5
+        // POST: SingleLinearForcasts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MonthlyTotal monthlyTotal = db.MonthlyTotals.Find(id);
-            db.MonthlyTotals.Remove(monthlyTotal);
+            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id);
+            db.SingleLinearForcasts.Remove(singleLinearForcast);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

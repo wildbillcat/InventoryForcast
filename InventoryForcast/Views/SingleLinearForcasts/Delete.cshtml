@@ -1,0 +1,96 @@
+﻿@model InventoryForcast.Models.Calculations.SingleLinearForcast
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SingleLinearForcast</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity_Forcast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity_Forcast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Absolute_Quantity_Forcast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Absolute_Quantity_Forcast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slope)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slope)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intercept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intercept)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JSON_MonthlyTotals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JSON_MonthlyTotals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sample_Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sample_Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkuClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkuClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valid)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
