@@ -17,7 +17,7 @@ namespace InventoryForcast.Models.Calculations
         public int Month_Id { get; set; } //Month * Year
         public DateTime Date { get; set; } //Forcasted Date
         public double Quantity_Forcast { get; set; }
-        public double Absolute_Quantity_Sold { get; set; }
+        public double Absolute_Quantity_Forcast { get; set; }
         public double Slope { get; set; }
         public double Intercept { get; set; }
         public string JSON_MonthlyTotals { get; set; }

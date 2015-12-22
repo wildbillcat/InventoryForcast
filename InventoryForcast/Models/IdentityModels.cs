@@ -31,6 +31,6 @@ namespace InventoryForcast.Models
         }
 
         public System.Data.Entity.DbSet<InventoryForcast.Models.Calculations.MonthlyTotal> MonthlyTotals { get; set; }
-
+        public System.Data.Entity.DbSet<InventoryForcast.Models.Calculations.SingleLinearForcast> SingleLinearForcasts { get; set; }
     }
 }
