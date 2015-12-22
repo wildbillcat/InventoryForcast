@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using InventoryForcast.Models;
 using InventoryForcast.Models.Calculations;
+using PagedList.Mvc;
+using PagedList;
 
 namespace InventoryForcast.Controllers.mvc
 {
@@ -16,9 +18,11 @@ namespace InventoryForcast.Controllers.mvc
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: MonthlyTotals
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.MonthlyTotals.ToList());
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(db.MonthlyTotals.OrderByDescending(s => s.Date).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: MonthlyTotals/Details/5

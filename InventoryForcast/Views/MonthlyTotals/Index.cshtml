@@ -1,4 +1,5 @@
-﻿@model IEnumerable<InventoryForcast.Models.Calculations.MonthlyTotal>
+﻿@model PagedList.IPagedList<InventoryForcast.Models.Calculations.MonthlyTotal>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -12,19 +13,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SKU)
+            SKU
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Month_Id)
+            Month_Id
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity_Sold)
+            Quantity_Sold
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Absolute_Quantity_Sold)
+            Absolute_Quantity_Sold
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Date
         </th>
         <th></th>
     </tr>
@@ -55,3 +56,7 @@
 }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
