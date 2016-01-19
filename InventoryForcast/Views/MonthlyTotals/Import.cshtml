@@ -1,0 +1,29 @@
+﻿@model IEnumerable<InventoryForcast.Models.Calculations.MonthlyTotal>
+@{
+    ViewBag.Title = "Import";
+}
+
+<h2>Import</h2>
+<p>Select a csv file and on the next page you will select inport options</p>
+
+
+@using (Html.BeginForm("ImportPreview", "MonthlyTotals", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Import</legend>
+
+        <div class="editor-label">
+            CSV File: (SKU,SalesTotal) Csv file should contain sales for a single month. Ex: 05-01-2015.csv
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("CsvFile", null, new { @id = "CsvFile", @name = "CsvFile", @type = "file", @required = "required" })
+            @Html.ValidationMessage("CsvFile")
+        </div>
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}

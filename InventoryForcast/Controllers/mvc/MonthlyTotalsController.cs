@@ -10,6 +10,7 @@ using InventoryForcast.Models;
 using InventoryForcast.Models.Calculations;
 using PagedList.Mvc;
 using PagedList;
+using CsvHelper;
 
 namespace InventoryForcast.Controllers.mvc
 {
@@ -61,6 +62,85 @@ namespace InventoryForcast.Controllers.mvc
             }
 
             return View(monthlyTotal);
+        }
+
+        // GET: MonthlyTotals/Create
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImportPreview(HttpPostedFileBase CsvFile)
+        {
+            List<MonthlyTotal> Totals = new List<MonthlyTotal>();
+            string saveAsDirectory = string.Concat(AppDomain.CurrentDomain.GetData("DataDirectory"), "\\csvimport");
+            if (CsvFile.FileName.ToLower().Split('.').Last().Equals("csv"))
+            {
+                //Validate SaveAs Directory is present
+                if (!System.IO.Directory.Exists(saveAsDirectory))
+                {
+                    System.IO.Directory.CreateDirectory(saveAsDirectory);
+                }
+                CsvFile.SaveAs(string.Concat(saveAsDirectory, "\\", CsvFile.FileName));
+                ViewData["CsvFile"] = CsvFile.FileName;
+                DateTime SalesDate = DateTime.Now; //Placeholder
+                //int MonthID = 12 * SalesDate.Month * SalesDate.Year;
+                using (var csv = new CsvReader(System.IO.File.OpenText(string.Concat(saveAsDirectory, "\\", CsvFile.FileName))))
+                {
+                    int i = 0;
+                    while (csv.Read())
+                    {
+                        if (i > 19)
+                        {
+                            break;
+                        }
+                        Totals.Add(new MonthlyTotal() {
+                            SKU = csv.GetField<int>(0),
+                            Quantity_Sold = csv.GetField<int>(1),
+                            Absolute_Quantity_Sold = 0, //PlaceHolder
+                            Date = SalesDate, //PlaceHolder
+                            Month_Id = 0 //Placeholder
+                        }
+                            );
+                        i++;
+                    }
+                }
+            }
+            return View(Totals);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ImportCommit(string CsvFile, DateTime CsvDate)
+        {
+            string saveAsDirectory = string.Concat(AppDomain.CurrentDomain.GetData("DataDirectory"), "\\csvimport");
+            if (System.IO.File.Exists(string.Concat(saveAsDirectory, "\\", CsvFile)))
+            {
+                DateTime SalesDate = CsvDate.Date;
+                SalesDate.AddDays(-1 * (SalesDate.Day - 1));//Ensures Day of the first of the month
+                int MonthID = 12 * SalesDate.Month * SalesDate.Year;
+                using (var csv = new CsvReader(System.IO.File.OpenText(string.Concat(saveAsDirectory, "\\", CsvFile))))
+                {
+                    while (csv.Read())
+                    {
+                        ApplicationDbContext ctx = new ApplicationDbContext();
+                        int _qty_sold = csv.GetField<int>(1);
+                        ctx.MonthlyTotals.Add(new MonthlyTotal()
+                        {
+                            SKU = csv.GetField<int>(0),
+                            Quantity_Sold = _qty_sold,
+                            Absolute_Quantity_Sold = MonthlyTotal.RemoveSeasonality(_qty_sold, SalesDate.Month),
+                            Date = SalesDate, 
+                            Month_Id = MonthID
+                        }
+                            );
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: MonthlyTotals/Edit/5

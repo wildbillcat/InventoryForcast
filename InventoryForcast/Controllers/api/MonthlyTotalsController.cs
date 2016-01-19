@@ -79,7 +79,8 @@ namespace InventoryForcast.Controllers.api
             {
                 return BadRequest(ModelState);
             }
-
+            //Ensure that absolute value has been calculated
+            monthlyTotal.Absolute_Quantity_Sold = MonthlyTotal.RemoveSeasonality(monthlyTotal.Quantity_Sold, monthlyTotal.Date.Month);
             db.MonthlyTotals.Add(monthlyTotal);
 
             try

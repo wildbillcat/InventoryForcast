@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
 namespace InventoryForcast.Models.Calculations
 {
@@ -23,22 +24,29 @@ namespace InventoryForcast.Models.Calculations
         {
             switch (month){
                 case 1:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("JanuarySeasonality"));
                 case 2:
-                    return 1;
+                    return double.Parse(ConfigurationManager.AppSettings.Get("FebruarySeasonality"));
                 case 3:
-                    return 1.15;
+                    return double.Parse(ConfigurationManager.AppSettings.Get("MarchSeasonality"));
                 case 4:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("AprilSeasonality"));
                 case 5:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("MaySeasonality"));
                 case 6:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("JuneSeasonality"));
                 case 7:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("JulySeasonality"));
                 case 8:
-                    return 1.265; //April, May, June, July, August.
+                    return double.Parse(ConfigurationManager.AppSettings.Get("AugustSeasonality"));
                 case 9:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("SeptemberSeasonality"));
                 case 10:
+                    return double.Parse(ConfigurationManager.AppSettings.Get("OctoberSeasonality"));
                 case 11:
-                    return 1.1385;
+                    return double.Parse(ConfigurationManager.AppSettings.Get("NovemberSeasonality"));
                 case 12:
-                    return 1.02465;
+                    return double.Parse(ConfigurationManager.AppSettings.Get("DecemberSeasonality"));
                 default:
                     throw new Exception(); 
             }

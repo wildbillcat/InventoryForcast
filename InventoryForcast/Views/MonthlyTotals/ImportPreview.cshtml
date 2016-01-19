@@ -1,0 +1,65 @@
+﻿@model IEnumerable<InventoryForcast.Models.Calculations.MonthlyTotal>
+@{
+    ViewBag.Title = "Import";
+}
+
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/themes/base/css")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryui")  
+    
+<h2>Import</h2>
+<p>Select a csv file and on the next page you will select inport options</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SKU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity_Sold)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SKU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity_Sold)
+            </td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("ImportCommit", "MonthlyTotals", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>Import Preview</legend>
+
+    <div class="editor-label">
+        CSV File: @ViewData["CsvFile"]
+    </div>
+    <div class="editor-field">
+        @Html.Hidden("CsvFile", ViewData["CsvFile"])
+    </div>
+
+    <div class="editor-label">
+        CSV Date: (Only Month and Year Matter)
+    </div>
+    <div class="editor-field">
+        @(Html.JQueryUI().Datepicker("CsvDate").ChangeYear(true).ChangeMonth(true))
+    </div>
+
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+</fieldset>
+}
