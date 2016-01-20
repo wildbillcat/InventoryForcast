@@ -12,7 +12,6 @@ namespace InventoryForcast.Models.Calculations
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SKU { get; set; }
-
         public int Month_Id { get; set; } //Month * Year
         public DateTime Date { get; set; } //Forcasted Date
         public double Quantity_Forcast { get; set; }
@@ -23,7 +22,27 @@ namespace InventoryForcast.Models.Calculations
         public int Sample_Size { get; set; }
         public string SkuClass { get; set; }
         public bool Valid { get; set; } //Used if not enough data exists to properly generate this calculation.
-
+        public int SuggestedInventory {
+            get {
+                double serviceLevel = 0;
+                switch (SkuClass)
+                {
+                    case "A":
+                        serviceLevel = 1.2;
+                        break;
+                    case "B":
+                        serviceLevel = 1;
+                        break;
+                    case "C":
+                        serviceLevel = .8;
+                        break;
+                    default:
+                        break;
+                }
+                double inventoryAmount = Math.Round(Quantity_Forcast * serviceLevel, 0, MidpointRounding.AwayFromZero);
+                return Convert.ToInt32(inventoryAmount);
+            }
+        }
         public static string GetSkuClass(int TotalSales)
         {
             string SkuClass;
