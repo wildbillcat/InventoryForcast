@@ -11,6 +11,7 @@ using InventoryForcast.Models.Calculations.Generators;
 
 namespace InventoryForcast.Controllers.api
 {
+    [Authorize]
     public class SingleLinearForcastsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

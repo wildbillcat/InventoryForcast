@@ -13,6 +13,7 @@ using InventoryForcast.Models.Calculations;
 
 namespace InventoryForcast.Controllers.api
 {
+    [Authorize]
     public class MonthlyTotalsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

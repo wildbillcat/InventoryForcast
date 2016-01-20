@@ -14,6 +14,7 @@ using CsvHelper;
 
 namespace InventoryForcast.Controllers.mvc
 {
+    [Authorize]
     public class MonthlyTotalsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
