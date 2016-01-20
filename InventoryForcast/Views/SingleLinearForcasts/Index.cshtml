@@ -63,7 +63,8 @@
             @Html.DisplayFor(modelItem => item.Valid)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.SKU, Month_Id=item.Month_Id })
+            @Html.ActionLink("Refresh", "Edit", new { id = item.SKU })
+            @Html.ActionLink("Details", "Details", new { id=item.SKU })
         </td>
     </tr>
 }

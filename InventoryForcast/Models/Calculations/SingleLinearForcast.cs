@@ -9,11 +9,10 @@ namespace InventoryForcast.Models.Calculations
 {
     public class SingleLinearForcast
     {
-        [Key, Column(Order = 0)]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SKU { get; set; }
-        [Key, Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+
         public int Month_Id { get; set; } //Month * Year
         public DateTime Date { get; set; } //Forcasted Date
         public double Quantity_Forcast { get; set; }

@@ -10,6 +10,7 @@ using InventoryForcast.Models;
 using InventoryForcast.Models.Calculations;
 using PagedList.Mvc;
 using PagedList;
+using InventoryForcast.Models.Calculations.Generators;
 
 namespace InventoryForcast.Controllers.mvc
 {
@@ -26,45 +27,7 @@ namespace InventoryForcast.Controllers.mvc
         }
 
         // GET: SingleLinearForcasts/Details/5
-        public ActionResult Details(int? id, int? Month_Id)
-        {
-            if (id == null || Month_Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id, Month_Id);
-            if (singleLinearForcast == null)
-            {
-                return HttpNotFound();
-            }
-            return View(singleLinearForcast);
-        }
-
-        // GET: SingleLinearForcasts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SingleLinearForcasts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SKU,Month_Id,Date,Quantity_Forcast,Absolute_Quantity_Forcast,Slope,Intercept,JSON_MonthlyTotals,Sample_Size,SkuClass,Valid")] SingleLinearForcast singleLinearForcast)
-        {
-            if (ModelState.IsValid)
-            {
-                db.SingleLinearForcasts.Add(singleLinearForcast);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(singleLinearForcast);
-        }
-
-        // GET: SingleLinearForcasts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -78,20 +41,29 @@ namespace InventoryForcast.Controllers.mvc
             return View(singleLinearForcast);
         }
 
-        // POST: SingleLinearForcasts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SKU,Month_Id,Date,Quantity_Forcast,Absolute_Quantity_Forcast,Slope,Intercept,JSON_MonthlyTotals,Sample_Size,SkuClass,Valid")] SingleLinearForcast singleLinearForcast)
+        // GET: SingleLinearForcasts/Create
+        public ActionResult Create()
         {
-            if (ModelState.IsValid)
+            return View();
+        }
+        
+        // GET: SingleLinearForcasts/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
             {
-                db.Entry(singleLinearForcast).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(singleLinearForcast);
+            SingleLinearForcast singleLinearForcast = db.SingleLinearForcasts.Find(id);
+            if (singleLinearForcast == null)
+            {
+                return HttpNotFound();
+            }
+            int sku = singleLinearForcast.SKU;
+            db.SingleLinearForcasts.Remove(singleLinearForcast);
+            db.SaveChanges();
+            SingleLinearForcastGenerator.GenerateSingleLinearForcast(sku);
+            return RedirectToAction("Details", new { id = sku });
         }
 
         // GET: SingleLinearForcasts/Delete/5

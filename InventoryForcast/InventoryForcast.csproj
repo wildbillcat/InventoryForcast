@@ -212,8 +212,14 @@
     <Compile Include="Migrations\201512220224253_addedSeasonality.Designer.cs">
       <DependentUpon>201512220224253_addedSeasonality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601200016075_refactor_key.cs" />
+    <Compile Include="Migrations\201601200016075_refactor_key.Designer.cs">
+      <DependentUpon>201601200016075_refactor_key.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Calculations\Generators\SingleLinearForcastGenerator.cs" />
+    <Compile Include="Models\Calculations\poco\LinearDataSet.cs" />
     <Compile Include="Models\Calculations\SingleLinearForcast.cs" />
     <Compile Include="Models\Calculations\MonthlyTotal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -358,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512220224253_addedSeasonality.resx">
       <DependentUpon>201512220224253_addedSeasonality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601200016075_refactor_key.resx">
+      <DependentUpon>201601200016075_refactor_key.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

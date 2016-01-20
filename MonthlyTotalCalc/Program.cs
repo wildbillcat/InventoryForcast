@@ -22,7 +22,7 @@ namespace MonthlyTotalCalc
                     string[] datePieces = filepath.Split('\\').Last().Split('.')[0].Split('-');
                     DateTime SalesDate = new DateTime(int.Parse(datePieces[2]), int.Parse(datePieces[0]), int.Parse(datePieces[1]));
                     SalesDate.AddDays(-1 * (SalesDate.Day - 1));//Ensures Day of the first of the month
-                    int MonthID = 12 * SalesDate.Month * SalesDate.Year;
+                    int MonthID = (12 * SalesDate.Year) + SalesDate.Month;
                     while (csv.Read())
                     {
                         using(var ctx = new InventoryForcast.Models.ApplicationDbContext())
