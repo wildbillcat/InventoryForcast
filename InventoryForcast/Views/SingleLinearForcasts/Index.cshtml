@@ -33,9 +33,6 @@
         <th>
             Valid
         </th>
-        <th>
-            Suggested Inventory
-        </th>
         <th></th>
     </tr>
 
@@ -64,9 +61,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Valid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SuggestedInventory)
         </td>
         <td>
             @Html.ActionLink("Refresh", "Edit", new { id = item.SKU })

@@ -24,6 +24,7 @@ namespace InventoryForcast.Models.Calculations.Generators
             ApplicationDbContext db = new ApplicationDbContext();
             MonthlyTotal MT = db.MonthlyTotals.Where(p => p.SKU == id).OrderBy(g => g.Date).ToArray().Last();
             DateTime ForcastDate = MT.Date.AddMonths(1);
+            int forcast_month_id = (12 * ForcastDate.Year) + ForcastDate.Month;
             List<MonthlyTotal> Totals = db.MonthlyTotals.Where(P => P.SKU == id && P.Date < ForcastDate).OrderByDescending(O => O.Date).Take(12).ToList();
             List<LinearDataSet> DS = new List<LinearDataSet>();
             double Intercept = 0;
@@ -40,7 +41,7 @@ namespace InventoryForcast.Models.Calculations.Generators
                 double[] YTotals = Totals.Select(P => P.Absolute_Quantity_Sold).ToArray();
                 double[] YTotalsR = Totals.Select(P => P.Quantity_Sold).ToArray();
                 double[] XMonth = Totals.Select(P => (double)(P.Date.Year * 12) + P.Date.Month).ToArray();
-                double[] t = Linear.Forcast(ForcastDate.Month, XMonth, YTotals);
+                double[] t = Linear.Forcast(forcast_month_id, XMonth, YTotals);
                 DS.Add(new LinearDataSet() { label = "Actual Sales", y = YTotalsR, x = XMonth });
                 DS.Add(new LinearDataSet() { label = "Adjusted Sales", y = YTotals, x = XMonth });
                 List<double> TrendYVals = new List<double>();

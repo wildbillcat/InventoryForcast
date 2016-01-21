@@ -85,13 +85,6 @@
             @Html.DisplayFor(model => model.Valid)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SuggestedInventory)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SuggestedInventory)
-        </dd>
     </dl>
 
     <style>       
@@ -132,8 +125,8 @@ var svg = d3.select("#chart").append("svg")
 function d3_xy_chart() {
     var width = 640,
         height = 480,
-        xlabel = "X Axis Label",
-        ylabel = "Y Axis Label" ;
+        xlabel = "Month",
+        ylabel = "Sales" ;
 
     function chart(selection) {
         selection.each(function(datasets) {
